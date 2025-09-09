@@ -1,4 +1,8 @@
+let cart = [];
+
+
 // Load Categories
+
 const loadCategory = async () => {
   const response = await fetch('https://openapi.programming-hero.com/api/categories');
   const data = await response.json();
@@ -26,11 +30,9 @@ const showCategory = (categories) => {
 // Load tree by Level 
 const loadtreeById = async (id) => {
   showLoader();
-console.log(id)
   const response = await fetch(`https://openapi.programming-hero.com/api/category/${id}`);
   const data = await response.json();
   const allData = data.plants;
-  console.log(allData,data)
 
   removeActiveClass();
 
@@ -40,17 +42,7 @@ console.log(id)
   const treeCardContainer = document.getElementById('tree-container-main');
   treeCardContainer.innerHTML = "";
 
-  if (!allData.length) {
-    treeCardContainer.innerHTML = `
-      <div class="col-span-3 text-center p-6">
-        <h2 class="text-5xl font-bold text-gray-800"><i class="fa-solid fa-triangle-exclamation"></i></h2>
-        <p class="text-gray-500 text-sm mt-2">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
-        <p class="text-xl font-semibold text-gray-700 mt-2">নেক্সট Lesson এ যান</p>
-      </div>
-    `;
-    hideLoader();
-    return;
-  }
+
 
   allData.forEach(item => {
     const div = document.createElement('div');
@@ -65,7 +57,7 @@ console.log(id)
     </div>
 
     <!-- Title -->
-    <h3 class="font-semibold text-gray-800">${item.name || "Unknown Tree"}</h3>
+    <h3 onclick="showCardDetail(${item.id})" class="font-semibold text-gray-800 cursor-pointer">${item.name || "Unknown Tree"}</h3>
 
     <!-- Description -->
     <p class="text-gray-600 text-sm mb-3 line-clamp-3">
@@ -81,7 +73,7 @@ console.log(id)
     </div>
 
     <!-- Button -->
-    <button class="w-full bg-green-700 text-white py-2.5 rounded-full font-medium hover:bg-green-800 transition">
+    <button onclick='addToCart(${JSON.stringify(item)})' class="w-full bg-green-700 text-white py-2.5 rounded-full font-medium hover:bg-green-800 transition">
       Add to Cart
     </button>
   </div>
@@ -92,11 +84,95 @@ console.log(id)
   hideLoader();
 };
 
-// Utility: remove active class from category buttons
+
+
+//-------------------------- cart section --------------------------//
+
+const addToCart = (plant) => {
+  // Check if already in cart
+  const existing = cart.find(item => item.id === plant.id);
+  if (existing) {
+    existing.quantity += 1; // Increase quantity
+  } else {
+    cart.push({ ...plant, quantity: 1 });
+  }
+  updateCartUI();
+};
+
+// Update Cart UI
+const updateCartUI = () => {
+  const cartItemsContainer = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+
+  cartItemsContainer.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+
+    const li = document.createElement('li');
+    li.className = "flex justify-between items-center bg-[#F0FDF4] p-2 rounded";
+    li.innerHTML = `
+      <span>${item.name} <span class="text-gray-500">${item.price} × ${item.quantity}</span></span>
+      <button class="remove-btn text-gray-400 hover:text-red-500">✕</button>
+    `;
+
+    // Handle remove button
+    li.querySelector(".remove-btn").addEventListener("click", () => {
+      removeFromCart(item.id);
+    });
+
+    cartItemsContainer.appendChild(li);
+  });
+
+  cartTotal.textContent = `Total: ${total} ৳`;
+};
+
+// Remove item from cart
+const removeFromCart = (id) => {
+  cart = cart.filter(item => item.id !== id);
+  updateCartUI();
+};
+
+
+// remove active class from category buttons
 const removeActiveClass = () => {
   const buttons = document.querySelectorAll("#tree-container button");
   buttons.forEach(btn => btn.classList.remove("active"));
 };
+
+
+
+const showCardDetail = async (id) => {
+ const response = await fetch(`https://openapi.programming-hero.com/api/plant/${id}`);
+  const data = await response.json();
+  const allData = data.plants;
+console.log(allData)
+const modal = document.getElementById('modal');
+    const closeModalBtn = document.getElementById('closeModal');
+    document.getElementById('modalImage').src = allData.image;
+      document.getElementById('modalTitle').textContent = allData.name;
+      document.getElementById('modalCategory').textContent = `Category: ${allData.category}`;
+      document.getElementById('modalPrice').textContent = `Price: $${allData.price}`;
+      document.getElementById('modalDescription').textContent = allData.description;
+      modal.classList.remove('hidden');
+
+       // Close modal
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    // Close modal on clicking outside content
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+
+}
+
+
 
 // Dummy loader functions
 // Show loader

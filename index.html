@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Tailwind Navbar</title>
+  <title>Green Earth</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
@@ -144,27 +144,37 @@
           <div class="w-12 h-12 border-4 border-t-green-700 border-gray-300 rounded-full animate-spin"></div>
         </div>
 
+        <!-- -----------------------------MOdal -------------------- -->
 
-        <!-- Add tree card here -->
+        <!-- Modal -->
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+          <div class="bg-white rounded-lg shadow-lg w-96 p-6 relative">
+            <button id="closeModal"
+        class="absolute top-3 right-3 w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600">
+  &times;
+</button>
+            <img id="modalImage" src="" alt="Plant Image" class="w-full h-48 object-cover rounded mb-4">
+            <h2 id="modalTitle" class="text-xl font-bold mb-2">Plant Name</h2>
+            <p id="modalCategory" class="text-gray-600 mb-2">Category: </p>
+            <p id="modalPrice" class="text-gray-800 font-semibold mb-4">Price: </p>
+            <p id="modalDescription" class="text-gray-700">Plant description goes here.</p>
+          </div>
+        </div>
+          <!-- Add tree card here -->
       </main>
 
       <!-- Cart -->
       <aside class="md:col-span-3 bg-white p-4 rounded-lg shadow-sm">
         <h3 class="font-semibold text-gray-800 mb-4">Your Cart</h3>
-        <ul class="space-y-2">
-          <li class="flex justify-between items-center text-sm">
-            <span>Mango Tree <span class="text-gray-500">৳500 × 1</span></span>
-            <button class="text-gray-400 hover:text-red-500">✕</button>
-          </li>
-          <li class="flex justify-between items-center text-sm">
-            <span>Guava Tree <span class="text-gray-500">৳500 × 1</span></span>
-            <button class="text-gray-400 hover:text-red-500">✕</button>
-          </li>
+        <hr class="mb-4">
+
+        <ul id="cartItems" class="space-y-2">
+         <span class="flex justify-center small">Empty Card</span>
         </ul>
-        <div class="border-t mt-4 pt-4 flex justify-between font-semibold">
-          <span>Total:</span>
-          <span>৳1000</span>
+        <div id="cartTotal" class="border-t mt-4 pt-4 flex justify-between font-semibold">
+         
         </div>
+
       </aside>
     </div>
   </section>
