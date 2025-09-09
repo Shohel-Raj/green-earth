@@ -22,7 +22,10 @@
       scroll-behavior: smooth;
     }
 
-
+    .active {
+      background: #2a8b4e;
+      color: white;
+    }
   </style>
 </head>
 
@@ -73,47 +76,101 @@
   <!-- Banner Section -->
   <div class="bg-green-100">
     <!-- Banner Section -->
-   <section class="relative max-w-7xl mx-auto bg-green-100 overflow-hidden">
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-    
-    <!-- Left Image -->
-    <div class="hidden md:block md:col-span-3">
-      <img
-        src="assets/hero-leaf1.png"
-        alt="Tree Planting"
-        class="w-full h-full object-cover ">
-    </div>
+    <section class="relative max-w-7xl mx-auto bg-green-100 overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
 
-    <!-- Center Content -->
-    <div class="col-span-1 md:col-span-6 text-center  py-8 sm:py-16 md:py-10 px-6">
-      <h1 class="text-2xl sm:text-3xl md:text-3xl font-bold text-gray-800 mb-4 leading-snug">
-        Plant a Tree, Grow a Future
-      </h1>
-      <p class="text-gray-600 mb-6 text-xl">
-        Join our mission to plant 1 million trees and make the Earth greener for future generations.
-      </p>
-      <a href="#"
-        class="inline-block bg-yellow-400 mb-4 text-gray-800 font-semibold px-5 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-full shadow-md hover:bg-yellow-500 transition">
-        Get Involved
-      </a>
-    </div>
+        <!-- Left Image -->
+        <div class="hidden md:block md:col-span-3">
+          <img src="assets/hero-leaf1.png" alt="Tree Planting" class="w-full h-full object-cover ">
+        </div>
 
-    <!-- Right Image -->
-    <div class="hidden md:block md:col-span-3">
-      <img
-        src="assets/hero-leaf2.png"
-        alt="Tree Planting"
-        class="w-full h-full object-cover ">
-    </div>
+        <!-- Center Content -->
+        <div class="col-span-1 md:col-span-6 text-center  py-8 sm:py-16 md:py-10 px-6">
+          <h1 class="text-2xl sm:text-3xl md:text-3xl font-bold text-gray-800 mb-4 leading-snug">
+            Plant a Tree, Grow a Future
+          </h1>
+          <p class="text-gray-600 mb-6 text-xl">
+            Join our mission to plant 1 million trees and make the Earth greener for future generations.
+          </p>
+          <a href="#"
+            class="inline-block bg-yellow-400 mb-4 text-gray-800 font-semibold px-5 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-full shadow-md hover:bg-yellow-500 transition">
+            Get Involved
+          </a>
+        </div>
 
-  </div>
-</section>
+        <!-- Right Image -->
+        <div class="hidden md:block md:col-span-3">
+          <img src="assets/hero-leaf2.png" alt="Tree Planting" class="w-full h-full object-cover ">
+        </div>
+
+      </div>
+    </section>
 
   </div>
 
+  <!-- --------------------- Main section ----------------------------- -->
+  <section class="max-w-7xl mx-auto py-10 px-4">
+    <h2 class="text-center text-2xl md:text-3xl font-semibold mb-10">Choose Your Trees</h2>
 
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <!-- Categories Sidebar -->
+      <aside class="md:col-span-2 bg-white p-4 rounded-lg shadow-sm">
+        <div id="tree-container" class=" flex gap-2 flex-col justify-left items-start">
+          <!--  catagory list -->
+        </div>
+
+      </aside>
+
+      <!-- Product Grid -->
+      <main class="md:col-span-7">
+        <div id="tree-container-main" class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            class="flex items-center justify-center col-span-7 py-36 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300">
+            <div class="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12h6m2 0a2 2 0 110 4H7a2 2 0 110-4h10zm0-6a2 2 0 110 4H7a2 2 0 110-4h10z" />
+              </svg>
+              <h3 class="mt-4 text-lg font-semibold text-gray-700">No Category Selected</h3>
+              <p class="mt-2 text-sm text-gray-500">Please select a category to see items here.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ----------------------- loader ------------------------- -->
+        <div id="loader" class="fixed inset-0 bg-white bg-opacity-70 flex items-center justify-center hidden z-50">
+          <div class="w-12 h-12 border-4 border-t-green-700 border-gray-300 rounded-full animate-spin"></div>
+        </div>
+
+
+        <!-- Add tree card here -->
+      </main>
+
+      <!-- Cart -->
+      <aside class="md:col-span-3 bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4">Your Cart</h3>
+        <ul class="space-y-2">
+          <li class="flex justify-between items-center text-sm">
+            <span>Mango Tree <span class="text-gray-500">৳500 × 1</span></span>
+            <button class="text-gray-400 hover:text-red-500">✕</button>
+          </li>
+          <li class="flex justify-between items-center text-sm">
+            <span>Guava Tree <span class="text-gray-500">৳500 × 1</span></span>
+            <button class="text-gray-400 hover:text-red-500">✕</button>
+          </li>
+        </ul>
+        <div class="border-t mt-4 pt-4 flex justify-between font-semibold">
+          <span>Total:</span>
+          <span>৳1000</span>
+        </div>
+      </aside>
+    </div>
+  </section>
 
   <script src="/Js/index.js"></script>
+  <script src="/Js/Loaderdata.js"></script>
 
 </body>
 
